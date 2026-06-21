@@ -15,6 +15,8 @@ export const metadata = {
 import { client } from '@/lib/sanity/client';
 import { navigationQuery } from '@/lib/sanity/queries';
 
+import { WhatsAppWidget } from '@/components/WhatsAppWidget';
+
 export default async function RootLayout({ children }) {
   // Fetch global site navigation data (Header & Footer)
   const navData = await client.fetch(navigationQuery).catch(() => null);
@@ -27,6 +29,7 @@ export default async function RootLayout({ children }) {
           <main className="flex-1 pt-[72px] md:pt-[80px]">
             {children}
           </main>
+          <WhatsAppWidget />
           <Footer navData={navData} />
         </AnimationProvider>
       </body>

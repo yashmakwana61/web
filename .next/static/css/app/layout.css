@@ -1,7 +1,7 @@
 /*!*****************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./src/app/globals.css ***!
   \*****************************************************************************************************************************************************************************************************************************************************************/
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
@@ -151,7 +151,7 @@ html,
   -moz-tab-size: 4; /* 3 */
   -o-tab-size: 4;
      tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-family: Inter, sans-serif; /* 4 */
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
@@ -596,7 +596,7 @@ html {
   }
 
 body {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     overflow-x: hidden;
@@ -2871,7 +2871,7 @@ p { line-height: 1.625; max-width: 65ch; }
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .font-sans{
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Inter, sans-serif;
 }
 .font-serif{
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -6337,6 +6337,18 @@ p { line-height: 1.625; max-width: 65ch; }
 .\[\&_img\]\:object-cover img{
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.\[\&_input\]\:flex-1 input{
+  flex: 1 1 0%;
+}
+
+.\[\&_input\]\:border-destructive input{
+  border-color: hsl(var(--destructive));
+}
+
+.\[\&_input\]\:focus-visible\:ring-destructive:focus-visible input{
+  --tw-ring-color: hsl(var(--destructive));
 }
 
 .\[\&_p\]\:leading-relaxed p{

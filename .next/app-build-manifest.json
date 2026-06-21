@@ -14,12 +14,8 @@
     "/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/contact/page.css",
       "static/chunks/app/contact/page.js"
-    ],
-    "/services/erp-consulting/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/services/erp-consulting/page.js"
     ]
   }
 }

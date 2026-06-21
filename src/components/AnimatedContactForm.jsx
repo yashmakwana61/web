@@ -10,12 +10,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import { CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 export function AnimatedContactForm() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     company: '',
     industry: '',
     message: '',
@@ -38,6 +41,11 @@ export function AnimatedContactForm() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
+    if (!formData.phone) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!isValidPhoneNumber(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
     if (!formData.company.trim()) newErrors.company = 'Company name is required';
     if (!formData.industry) newErrors.industry = 'Please select an industry';
     if (!formData.message.trim()) {
@@ -49,17 +57,39 @@ export function AnimatedContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+
       setIsSubmitting(false);
       setIsSubmitted(true);
       toast({ title: 'Message sent', description: 'We will get back to you within 24 hours.' });
-      setFormData({ name: '', email: '', company: '', industry: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', company: '', industry: '', message: '' });
       setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+    } catch (error) {
+      setIsSubmitting(false);
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to send message. Please try again.',
+        variant: 'destructive',
+      });
+    }
   };
 
   if (isSubmitted) {
@@ -90,7 +120,6 @@ export function AnimatedContactForm() {
             {[
               { id: 'name', label: 'Name *', type: 'text', placeholder: 'Your full name' },
               { id: 'email', label: 'Email *', type: 'email', placeholder: 'your.email@company.com' },
-              { id: 'company', label: 'Company *', type: 'text', placeholder: 'Your company name' }
             ].map((field) => (
               <div key={field.id} className="space-y-2 relative">
                 <Label htmlFor={field.id} className={`transition-colors duration-300 ${focusedField === field.id ? 'text-primary' : ''}`}>
@@ -115,6 +144,49 @@ export function AnimatedContactForm() {
                 </AnimatePresence>
               </div>
             ))}
+
+            <div className="space-y-2 relative">
+              <Label htmlFor="phone" className={`transition-colors duration-300 ${focusedField === 'phone' ? 'text-primary' : ''}`}>Phone *</Label>
+              <PhoneInput
+                id="phone"
+                defaultCountry="US"
+                value={formData.phone}
+                onChange={(value) => handleChange('phone', value)}
+                onFocus={() => setFocusedField('phone')}
+                onBlur={() => setFocusedField(null)}
+                inputComponent={Input}
+                className={`flex gap-3 items-center [&_input]:flex-1 ${errors.phone ? '[&_input]:border-destructive [&_input]:focus-visible:ring-destructive' : ''}`}
+                placeholder="Your phone number"
+              />
+              <AnimatePresence>
+                {errors.phone && (
+                  <motion.p initial={{ opacity: 0, x: -10, height: 0 }} animate={{ opacity: 1, x: 0, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-sm text-destructive flex items-center mt-1">
+                    <AlertCircle className="w-3 h-3 mr-1" /> {errors.phone}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="space-y-2 relative">
+              <Label htmlFor="company" className={`transition-colors duration-300 ${focusedField === 'company' ? 'text-primary' : ''}`}>Company *</Label>
+              <Input
+                id="company"
+                type="text"
+                value={formData.company}
+                onChange={(e) => handleChange('company', e.target.value)}
+                onFocus={() => setFocusedField('company')}
+                onBlur={() => setFocusedField(null)}
+                className={`text-foreground transition-all duration-300 bg-background ${errors.company ? 'border-destructive focus-visible:ring-destructive' : 'focus-visible:ring-primary'}`}
+                placeholder="Your company name"
+              />
+              <AnimatePresence>
+                {errors.company && (
+                  <motion.p initial={{ opacity: 0, x: -10, height: 0 }} animate={{ opacity: 1, x: 0, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="text-sm text-destructive flex items-center mt-1">
+                    <AlertCircle className="w-3 h-3 mr-1" /> {errors.company}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
           </AnimatePresence>
 
           <div className="space-y-2 relative">
