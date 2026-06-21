@@ -3,8 +3,7 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { AnimatedBlogCard } from '@/components/AnimatedBlogCard.jsx';
 
 function BlogPage() {
@@ -42,11 +41,7 @@ function BlogPage() {
 
   return (
     <>
-      
-
-      <Header />
-
-      <main>
+      <div>
         {/* Hero */}
         <section className="py-20 bg-muted relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 animate-gradient-shift" />
@@ -75,9 +70,7 @@ function BlogPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
+      </div>
     </>
   );
 }

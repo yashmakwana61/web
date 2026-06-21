@@ -3,19 +3,14 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { AnimatedContactForm } from '@/components/AnimatedContactForm.jsx';
 import { Mail, Phone, MapPin, MessageCircle, Clock } from 'lucide-react';
 
 function ContactPage() {
   return (
     <>
-      
-
-      <Header />
-
-      <main>
+      <div>
         {/* Hero */}
         <section className="pt-32 pb-20 bg-primary/5 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-black/[0.02]" />
@@ -119,9 +114,7 @@ function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
+      </div>
     </>
   );
 }

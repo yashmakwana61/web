@@ -3,8 +3,7 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { AnimatedBarChart } from '@/components/charts/AnimatedBarChart';
 import { AnimatedLineChart } from '@/components/charts/AnimatedLineChart';
 import Link from '@/components/Link';
@@ -30,9 +29,7 @@ function ServicesPage() {
 
   return (
     <>
-      
-      <Header />
-      <main className="pt-24 lg:pt-32">
+      <div>
         <section className="section-container pb-20">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h1 className="mb-6">Comprehensive Digital Transformation</h1>
@@ -81,8 +78,7 @@ function ServicesPage() {
             </div>
           </div>
         </section>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

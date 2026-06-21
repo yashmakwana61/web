@@ -6,8 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from '@/components/Link';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 
 export function ServicePageTemplate({ data }) {
   // Generate JSON-LD Schema
@@ -32,11 +31,7 @@ export function ServicePageTemplate({ data }) {
 
   return (
     <>
-      
-
-      <Header />
-      
-      <main className="min-h-screen pt-[72px] md:pt-[80px]">
+      <div className="min-h-screen">
         {/* 1. Hero Section */}
         <section className="relative py-20 lg:py-32 overflow-hidden bg-slate-50 border-b">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(hsl(var(--primary)) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
@@ -193,8 +188,7 @@ export function ServicePageTemplate({ data }) {
           </div>
         </section>
 
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }

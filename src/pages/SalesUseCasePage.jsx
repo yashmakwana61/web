@@ -4,18 +4,13 @@ import React from 'react';
 
 import Link from '@/components/Link';
 import { motion } from 'framer-motion';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { Button } from '@/components/ui/button';
 
 function SalesUseCasePage() {
   return (
     <>
-      
-
-      <Header />
-
-      <main>
+      <div>
         {/* Hero */}
         <section className="py-20 bg-muted">
           <div className="section-container">
@@ -184,9 +179,7 @@ function SalesUseCasePage() {
             </motion.div>
           </div>
         </section>
-      </main>
-
-      <Footer />
+      </div>
     </>
   );
 }

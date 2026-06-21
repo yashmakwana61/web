@@ -4,8 +4,7 @@ import React from 'react';
 
 import Link from '@/components/Link';
 import { Mail, Phone, MessageCircle, ArrowRight } from 'lucide-react';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { ContactFormSection } from '@/components/ContactFormSection.jsx';
 
 import { HeroSection } from '@/components/HeroSection.jsx';
@@ -20,11 +19,7 @@ import { TechnologyStackSection } from '@/components/TechnologyStackSection.jsx'
 function HomePage() {
   return (
     <>
-      
-
-      <Header />
-
-      <main className="min-h-screen pt-[72px] md:pt-[80px]">
+      <div className="min-h-screen">
         <HeroSection />
         <TrustIndicatorsSection />
         <ServicesOverviewSection />
@@ -37,9 +32,7 @@ function HomePage() {
         {/* Contact Form Section */}
         <ContactFormSection />
 
-      </main>
-
-      <Footer />
+      </div>
     </>
   );
 }

@@ -4,19 +4,14 @@ import React from 'react';
 
 import Link from '@/components/Link';
 import { motion } from 'framer-motion';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { Button } from '@/components/ui/button';
 import { Factory, Package, TrendingUp, Settings } from 'lucide-react';
 
 function ManufacturingIndustryPage() {
   return (
     <>
-      
-
-      <Header />
-
-      <main>
+      <div>
         {/* Hero */}
         <section className="py-20 bg-muted">
           <div className="section-container">
@@ -222,9 +217,7 @@ function ManufacturingIndustryPage() {
             </motion.div>
           </div>
         </section>
-      </main>
-
-      <Footer />
+      </div>
     </>
   );
 }

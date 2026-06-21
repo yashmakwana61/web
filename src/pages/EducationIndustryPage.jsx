@@ -4,8 +4,7 @@ import React from 'react';
 
 import Link from '@/components/Link';
 import { motion } from 'framer-motion';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+
 import { AnimatedHero } from '@/components/AnimatedHero.jsx';
 import { AnimatedProcessTimeline } from '@/components/AnimatedProcessTimeline.jsx';
 import { AnimatedCaseStudyCard } from '@/components/AnimatedCaseStudyCard.jsx';
@@ -38,11 +37,7 @@ function EducationIndustryPage() {
 
   return (
     <>
-      
-
-      <Header />
-
-      <main>
+      <div>
         <AnimatedHero 
           title="ERP solutions for education"
           subtitle="Comprehensive ERP and automation solutions designed specifically for schools, colleges, and universities."
@@ -126,9 +121,7 @@ function EducationIndustryPage() {
             </motion.div>
           </div>
         </section>
-      </main>
-
-      <Footer />
+      </div>
     </>
   );
 }
