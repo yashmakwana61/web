@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
-    "build": "node tools/generate-llms.js || true && next build",
+    "build": "node tools/generate-sitemap.js && node tools/generate-llms.js || true && next build",
     "start": "next start -p 3000",
     "lint": "eslint . --quiet",
     "lint:warn": "eslint ."

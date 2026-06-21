@@ -295,5 +295,15 @@ export const landingPageBySlugQuery = `
         }
       }
     }
+    }
+  }
+`;
+
+// 9. Sitemap
+export const sitemapQuery = `
+  *[_type in ["servicePage", "industryPage", "useCasePage", "blogPost", "caseStudy", "landingPage"] && defined(slug.current)] {
+    "url": slug.current,
+    "lastModified": _updatedAt,
+    _type
   }
 `;

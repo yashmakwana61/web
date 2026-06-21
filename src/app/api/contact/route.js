@@ -12,9 +12,6 @@ const sanityClient = createClient({
   token: process.env.SANITY_API_WRITE_TOKEN, // Needed for writing
 });
 
-// Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Define Schema for Validation
 const contactSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -69,6 +66,7 @@ export async function POST(req) {
       if (!process.env.RESEND_API_KEY) {
          console.warn("RESEND_API_KEY is missing. Email notification won't be sent.");
       } else {
+        const resend = new Resend(process.env.RESEND_API_KEY);
         const { data, error } = await resend.emails.send({
           from: 'PreciseFect Leads <onboarding@resend.dev>', // Resend free tier restriction
           to: [process.env.RESEND_TO_EMAIL || 'info@precisefect.com'], // Must be the verified email on Resend account
