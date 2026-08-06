@@ -37,7 +37,7 @@ function Footer({ navData }) {
           <div className="flex flex-col items-start text-left">
             <Link to="/" className="mb-4 inline-block">
               <img 
-                src="https://horizons-cdn.hostinger.com/7dfd4d00-6239-4560-84bc-709b00097253/fc079947626e17a936eea7ad236954ee.png" 
+                src="/logo.png" 
                 alt="PreciseFect" 
                 className="w-[120px] h-auto"
               />

@@ -143,7 +143,7 @@ function Header({ navData }) {
           {/* 1. Logo on Left */}
           <Link to="/" className="flex items-center group z-50 transition-transform duration-300 hover:scale-[1.02]" aria-label="Home">
             <img 
-              src="https://horizons-cdn.hostinger.com/7dfd4d00-6239-4560-84bc-709b00097253/fc079947626e17a936eea7ad236954ee.png" 
+              src="/logo.png" 
               alt="PreciseFect Logo" 
               className="w-[120px] md:w-[140px] lg:w-[160px] h-auto object-contain"
             />
@@ -230,7 +230,7 @@ function Header({ navData }) {
             >
               <div className="p-5 border-b border-gray-100 flex items-center justify-between min-h-[72px]">
                 <img 
-                  src="https://horizons-cdn.hostinger.com/7dfd4d00-6239-4560-84bc-709b00097253/fc079947626e17a936eea7ad236954ee.png" 
+                  src="/logo.png" 
                   alt="PreciseFect Logo" 
                   className="w-[120px] h-auto"
                 />
