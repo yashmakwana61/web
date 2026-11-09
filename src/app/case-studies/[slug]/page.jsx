@@ -16,10 +16,11 @@ const getCaseStudy = cache(async (slug) => {
 });
 
 export async function generateMetadata({ params }) {
-  const { data, example } = await getCaseStudy(params.slug);
+  const { slug } = await params;
+  const { data, example } = await getCaseStudy(slug);
   if (!data && !example) return {};
 
-  const alternates = { canonical: `/case-studies/${params.slug}` };
+  const alternates = { canonical: `/case-studies/${slug}` };
   if (data) {
     return {
       title: data.seo?.metaTitle || `${data.title} Case Study`,
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function DynamicCaseStudyPage({ params }) {
-  const { data, example } = await getCaseStudy(params.slug);
+  const { slug } = await params;
+  const { data, example } = await getCaseStudy(slug);
   if (data) return <DynamicCaseStudyPageClient data={data} />;
   if (!example) notFound();
 

@@ -9,7 +9,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const data = await client.fetch(servicePageBySlugQuery, { slug: params.slug });
+  const { slug } = await params;
+  const data = await client.fetch(servicePageBySlugQuery, { slug });
   if (!data) return {};
   return {
     title: data.seo?.metaTitle || `${data.title} - PreciseFect`,
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function DynamicServicePage({ params }) {
-  const data = await client.fetch(servicePageBySlugQuery, { slug: params.slug });
+  const { slug } = await params;
+  const data = await client.fetch(servicePageBySlugQuery, { slug });
   if (!data) notFound();
   return <DynamicServicePageClient data={data} />;
 }

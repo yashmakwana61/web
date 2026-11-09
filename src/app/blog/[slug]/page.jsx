@@ -4,7 +4,8 @@ import DynamicBlogPageClient from './DynamicBlogPageClient';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
-  const data = await client.fetch(blogPostBySlugQuery, { slug: params.slug });
+  const { slug } = await params;
+  const data = await client.fetch(blogPostBySlugQuery, { slug });
   if (!data) return {};
   return {
     title: data.seo?.metaTitle || `${data.title} - PreciseFect Blog`,
@@ -14,7 +15,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function DynamicBlogPage({ params }) {
-  const data = await client.fetch(blogPostBySlugQuery, { slug: params.slug });
+  const { slug } = await params;
+  const data = await client.fetch(blogPostBySlugQuery, { slug });
   if (!data) notFound();
   return <DynamicBlogPageClient data={data} />;
 }

@@ -14,11 +14,12 @@ export const metadata = {
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function CaseStudiesPage({ searchParams }) {
-  const page = parseInt(searchParams.page || '1', 10);
+  const query = await searchParams;
+  const page = parseInt(query.page || '1', 10);
   const pageSize = 6;
   const start = (page - 1) * pageSize;
   const end = start + pageSize;
-  const industry = searchParams.industry || null;
+  const industry = query.industry || null;
 
   // Fetch data in parallel
   const [caseStudies, totalCount] = await Promise.all([

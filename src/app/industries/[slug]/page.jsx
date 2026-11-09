@@ -4,7 +4,8 @@ import DynamicIndustryPageClient from './DynamicIndustryPageClient';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
-  const data = await client.fetch(industryPageBySlugQuery, { slug: params.slug });
+  const { slug } = await params;
+  const data = await client.fetch(industryPageBySlugQuery, { slug });
   if (!data) return {};
   return {
     title: data.seo?.metaTitle || `${data.title} - PreciseFect`,
@@ -14,7 +15,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function DynamicIndustryPage({ params }) {
-  const data = await client.fetch(industryPageBySlugQuery, { slug: params.slug });
+  const { slug } = await params;
+  const data = await client.fetch(industryPageBySlugQuery, { slug });
   if (!data) notFound();
   return <DynamicIndustryPageClient data={data} />;
 }
