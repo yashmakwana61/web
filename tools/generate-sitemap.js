@@ -4,9 +4,7 @@
  * Pre-build script that queries Sanity CMS for all published slugs and
  * writes a standards-compliant sitemap.xml into the public/ directory.
  *
- * This approach is necessary because the project uses Next.js `output: 'export'`
- * (static site generation), which is incompatible with the App Router's dynamic
- * `sitemap()` convention.
+ * Both code-backed pages and published CMS entries are included.
  *
  * Run: node tools/generate-sitemap.js
  */
@@ -15,6 +13,7 @@ import { createClient } from '@sanity/client';
 import { writeFileSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { implementationExamples } from '../src/lib/implementationExamples.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -56,6 +55,18 @@ const STATIC_ROUTES = [
   { path: '/services', changefreq: 'weekly', priority: '0.9' },
   { path: '/blog', changefreq: 'daily', priority: '0.8' },
   { path: '/case-studies', changefreq: 'weekly', priority: '0.8' },
+  { path: '/industries', changefreq: 'monthly', priority: '0.8' },
+  { path: '/industries/education', changefreq: 'monthly', priority: '0.7' },
+  { path: '/industries/healthcare', changefreq: 'monthly', priority: '0.7' },
+  { path: '/industries/manufacturing', changefreq: 'monthly', priority: '0.7' },
+  { path: '/services/odoo-consulting', changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/erpnext-consulting', changefreq: 'monthly', priority: '0.8' },
+  { path: '/services/rpa-services', changefreq: 'monthly', priority: '0.8' },
+  { path: '/privacy', changefreq: 'yearly', priority: '0.3' },
+  { path: '/terms', changefreq: 'yearly', priority: '0.3' },
+  ...Object.keys(implementationExamples).map((slug) => ({
+    path: `/case-studies/${slug}`, changefreq: 'monthly', priority: '0.6',
+  })),
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -88,6 +99,7 @@ async function generateSitemap() {
   const today = toW3CDate(new Date());
 
   // Static entries
+  const staticPaths = new Set(STATIC_ROUTES.map(({ path }) => path));
   const staticEntries = STATIC_ROUTES.map((route) =>
     buildUrlEntry({
       loc: `${BASE_URL}${route.path}`,
@@ -104,7 +116,10 @@ async function generateSitemap() {
     console.log(`   ✓ Fetched ${pages.length} dynamic page(s) from Sanity`);
 
     dynamicEntries = pages
-      .filter((p) => p.slug && TYPE_PREFIX[p._type] !== undefined)
+      .filter((p) => {
+        const prefix = TYPE_PREFIX[p._type];
+        return p.slug && prefix !== undefined && !staticPaths.has(`${prefix}/${p.slug}`);
+      })
       .map((p) => {
         const prefix = TYPE_PREFIX[p._type];
         const isBlog = p._type === 'blogPost';

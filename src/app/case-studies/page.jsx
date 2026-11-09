@@ -4,10 +4,11 @@ import { caseStudiesListQuery, caseStudiesCountQuery } from '@/lib/sanity/querie
 import ScrollToTop from '@/components/ScrollToTop';
 import { AnimatedCaseStudyCard } from '@/components/AnimatedCaseStudyCard';
 import { Pagination } from '@/components/Pagination';
+import { implementationExamples } from '@/lib/implementationExamples';
 
 export const metadata = {
-  title: 'Case Studies - PreciseFect',
-  description: 'Real-world success stories from our ERP and automation clients.',
+  title: 'ERP and Automation Case Studies',
+  description: 'Browse ERP and workflow automation case studies and implementation examples for education, healthcare, and manufacturing.',
 };
 
 export const revalidate = 60; // Revalidate every 60 seconds
@@ -38,7 +39,7 @@ export default async function CaseStudiesPage({ searchParams }) {
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Case Studies</h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Real-world implementations across education, healthcare, and manufacturing with measurable results.
+                Explore ERP and workflow automation case studies and implementation examples across education, healthcare, and manufacturing.
               </p>
             </div>
           </div>
@@ -72,11 +73,34 @@ export default async function CaseStudiesPage({ searchParams }) {
               </>
             ) : (
               <div className="text-center py-20 text-slate-500">
-                <p className="text-xl">No case studies found.</p>
+                <p className="text-xl">No published client case studies match this view.</p>
               </div>
             )}
           </div>
         </section>
+        {page === 1 && !industry && (
+          <section className="bg-muted py-16">
+            <div className="section-container">
+              <h2 className="mb-3 text-center text-3xl font-bold">Implementation examples</h2>
+              <p className="mb-8 text-center text-muted-foreground">
+                These illustrative scenarios describe how to plan and evaluate an ERP or automation pilot.
+              </p>
+              <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+                {Object.entries(implementationExamples).map(([slug, example], index) => (
+                  <AnimatedCaseStudyCard
+                    key={slug}
+                    title={example.title}
+                    industry={example.industry}
+                    excerpt={example.description}
+                    link={`/case-studies/${slug}`}
+                    linkLabel="Read implementation example"
+                    index={index}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       

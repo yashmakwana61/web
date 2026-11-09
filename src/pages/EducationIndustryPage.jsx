@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { AnimatedHero } from '@/components/AnimatedHero.jsx';
 import { AnimatedProcessTimeline } from '@/components/AnimatedProcessTimeline.jsx';
 import { AnimatedCaseStudyCard } from '@/components/AnimatedCaseStudyCard.jsx';
+import { implementationExamples } from '@/lib/implementationExamples';
 import { Button } from '@/components/ui/button';
 import { GraduationCap, Users, DollarSign, BookOpen } from 'lucide-react';
 
@@ -74,29 +75,27 @@ function EducationIndustryPage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-16"
             >
-              <h2 className="mb-4">Education success stories</h2>
+              <h2 className="mb-4">Education ERP implementation examples</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                See how institutions are transforming their operations
+                Explore workflows for school admissions and university fee collection.
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <AnimatedCaseStudyCard 
-                title="Riverside Academy reduces admissions processing time by 68%"
-                industry="Education"
-                excerpt="How a K-12 school automated their admissions workflow and improved parent satisfaction with online application processing."
-                metrics="68% faster"
-                link="/case-studies/riverside-academy"
-                index={0}
-              />
-              <AnimatedCaseStudyCard 
-                title="Coastal University automates fee collection for 12,000 students"
-                industry="Education"
-                excerpt="A higher education institution implemented automated fee management with payment gateway integration and installment tracking."
-                metrics="$2.1M processed"
-                link="/case-studies/coastal-university"
-                index={1}
-              />
+              {['riverside-academy', 'coastal-university'].map((slug, index) => {
+                const example = implementationExamples[slug];
+                return (
+                  <AnimatedCaseStudyCard
+                    key={slug}
+                    title={example.title}
+                    industry={example.industry}
+                    excerpt={example.description}
+                    link={`/case-studies/${slug}`}
+                    linkLabel="Read implementation example"
+                    index={index}
+                  />
+                );
+              })}
             </div>
           </div>
         </section>

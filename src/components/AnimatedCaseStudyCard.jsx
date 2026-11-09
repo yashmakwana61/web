@@ -9,7 +9,7 @@ import { ArrowRight, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-export function AnimatedCaseStudyCard({ title, industry, excerpt, metrics, link, index = 0 }) {
+export function AnimatedCaseStudyCard({ title, industry, excerpt, metrics, link, linkLabel = 'Read full study', index = 0 }) {
   const { ref, isInView } = useScrollAnimation({ once: true, margin: "0px 0px -50px 0px" });
   
   return (
@@ -46,7 +46,7 @@ export function AnimatedCaseStudyCard({ title, industry, excerpt, metrics, link,
           
           <Button asChild variant="outline" className="w-full group/btn transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary">
             <Link to={link} className="flex items-center justify-center">
-              Read full study
+              {linkLabel}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
             </Link>
           </Button>

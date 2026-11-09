@@ -10,10 +10,10 @@ import Link from '@/components/Link';
 
 const services = [
   { icon: Database, title: 'ERP Consulting', description: 'Expert guidance for selecting and customizing ERP systems that align perfectly with your operational needs.', link: '/services/erp-consulting' },
-  { icon: Settings, title: 'Odoo Consulting', description: 'Comprehensive Odoo implementation services. Maximize the value of this flexible, open-source suite.', link: '/services/odoo' },
-  { icon: Cpu, title: 'ERPNext Consulting', description: 'Deploy ERPNext for an agile, scalable enterprise foundation that grows with your organization.', link: '/services/erpnext' },
+  { icon: Settings, title: 'Odoo Consulting', description: 'Comprehensive Odoo implementation services. Maximize the value of this flexible, open-source suite.', link: '/services/odoo-consulting' },
+  { icon: Cpu, title: 'ERPNext Consulting', description: 'Deploy ERPNext for an agile, scalable enterprise foundation that grows with your organization.', link: '/services/erpnext-consulting' },
   { icon: Bot, title: 'AI & Workflow Automation', description: 'Harness artificial intelligence to automate complex decisions and eliminate manual repetitive tasks.', link: '/services/ai-automation' },
-  { icon: FileText, title: 'RPA Services', description: 'Robotic Process Automation solutions that act as digital workers, ensuring 24/7 task execution.', link: '/services/rpa' },
+  { icon: FileText, title: 'RPA Services', description: 'Robotic Process Automation solutions that act as digital workers, ensuring 24/7 task execution.', link: '/services/rpa-services' },
   { icon: LineChart, title: 'Business Intelligence', description: 'Transform raw data into actionable insights through custom dashboards and predictive analytics.', link: '/services/business-intelligence' },
 ];
 
